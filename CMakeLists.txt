@@ -134,12 +134,12 @@ set(libcron
     "src/libcron/TaskQueue.h"
     "src/libcron/TimeTypes.h"
 )
-source_group("" FILES ${libcron})
+source_group("libcron" FILES ${libcron})
 
 set(date
     "src/date/date.h"
 )
-source_group("" FILES ${date})
+source_group("date" FILES ${date})
 
 
 set(ALL_FILES
@@ -182,8 +182,9 @@ set_target_properties(${PROJECT_NAME} PROPERTIES MSVC_RUNTIME_LIBRARY ${MSVC_RUN
 # Include directories
 ################################################################################
 target_include_directories(${PROJECT_NAME} PUBLIC
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/;"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/header;"
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/angelscript"
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/angelscript;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../hlsdk/common;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../hlsdk/dlls;"
     "${CMAKE_CURRENT_SOURCE_DIR}/../hlsdk/pm_shared;"
