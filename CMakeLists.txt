@@ -134,12 +134,12 @@ set(libcron
     "src/libcron/TaskQueue.h"
     "src/libcron/TimeTypes.h"
 )
-source_group("libcron" FILES ${libcron})
+source_group("" FILES ${libcron})
 
 set(date
     "src/date/date.h"
 )
-source_group("date" FILES ${date})
+source_group("" FILES ${date})
 
 
 set(ALL_FILES
