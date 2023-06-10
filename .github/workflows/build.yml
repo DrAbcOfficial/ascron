@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
 
 env:
-  SOLUTION_FILE_PATH: metamod/asexthook
+  SOLUTION_FILE_PATH: metamod/ascron
   BUILD_CONFIGURATION: Release
 
 permissions:
@@ -27,8 +27,8 @@ jobs:
     - name: Git Clone This
       uses: sudosubin/git-clone-action@v1.0.1
       with:
-        repository: DrAbcOfficial/asexthook
-        path: metamod/asexthook
+        repository: DrAbcOfficial/ascron
+        path: metamod/ascron
 
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
@@ -40,8 +40,8 @@ jobs:
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.0
       with:
-        name: asexthook.dll
-        path: metamod/build/addons/metamod/dlls/asexthook.dll
+        name: ascron.dll
+        path: metamod/build/addons/metamod/dlls/ascron.dll
     
   build-linux:
     runs-on: ubuntu-latest
@@ -61,15 +61,15 @@ jobs:
     - name: Git Clone This
       uses: sudosubin/git-clone-action@v1.0.1
       with:
-        repository: DrAbcOfficial/asexthook
-        path: metamod/asexthook
+        repository: DrAbcOfficial/ascron
+        path: metamod/ascron
 
     - name: Build
       working-directory: ${{env.SOLUTION_FILE_PATH}}
-      run: mkdir build && cd build && cmake -DCMAKE_CONFIGURATION_TYPES="Release" .. && make
+      run: mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=RELEASE .. && make
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.0
       with:
-        name: asexthook.so
-        path: ${{env.SOLUTION_FILE_PATH}}/build/libasexthook.so
+        name: ascron.so
+        path: ${{env.SOLUTION_FILE_PATH}}/build/libascron.so

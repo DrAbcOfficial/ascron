@@ -6,7 +6,7 @@ on:
     - 'v*'
 
 env:
-  SOLUTION_FILE_PATH: metamod/asexthook
+  SOLUTION_FILE_PATH: metamod/ascron
   BUILD_CONFIGURATION: Release
 
 permissions:
@@ -26,8 +26,8 @@ jobs:
     - name: Git Clone This
       uses: sudosubin/git-clone-action@v1.0.1
       with:
-        repository: DrAbcOfficial/asexthook
-        path: metamod/asexthook
+        repository: DrAbcOfficial/ascron
+        path: metamod/ascron
 
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v1.0.2
@@ -39,16 +39,16 @@ jobs:
     - name: Zipping All
       uses: vimtor/action-zip@v1
       with:
-          files: metamod/build/addons/metamod/dlls/asexthook.dll
-          dest: asexthook-windows-x86.zip
+          files: metamod/build/addons/metamod/dlls/ascron.dll
+          dest: ascron-windows-x86.zip
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
-          name: asexthook-${{ github.ref }}
+          name: ascron-${{ github.ref }}
           files: |
-            asexthook-windows-x86.zip
+            ascron-windows-x86.zip
     
   build-linux:
     runs-on: ubuntu-latest
@@ -68,23 +68,23 @@ jobs:
     - name: Git Clone This
       uses: sudosubin/git-clone-action@v1.0.1
       with:
-        repository: DrAbcOfficial/asexthook
-        path: metamod/asexthook
+        repository: DrAbcOfficial/ascron
+        path: metamod/ascron
 
     - name: Build
       working-directory: ${{env.SOLUTION_FILE_PATH}}
-      run: mkdir build && cd build && cmake -DCMAKE_CONFIGURATION_TYPES="Release" .. && make && mv libasexthook.so asexthook.so
+      run: mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=RELEASE .. && make && mv libascron.so ascron.so
 
     - name: Zipping All
       uses: vimtor/action-zip@v1
       with:
-          files: ${{env.SOLUTION_FILE_PATH}}/build/asexthook.so
-          dest: asexthook-ubuntu-i386.zip
+          files: ${{env.SOLUTION_FILE_PATH}}/build/ascron.so
+          dest: ascron-ubuntu-i386.zip
 
     - name: Create Release
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
-          name: asexthook-${{ github.ref }}
+          name: ascron-${{ github.ref }}
           files: |
-            asexthook-ubuntu-i386.zip
+            ascron-ubuntu-i386.zip
